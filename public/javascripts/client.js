@@ -24,20 +24,4 @@ angular.module('uploader', [])
 				console.log('Failure');
 			});
 		};
-	}])
-	.directive('file', function() {
-		return {
-			require:"ngModel",
-			restrict: 'A',
-			link: function($scope, element, attributes, ngModel) {
-				element.bind('change', function(event){
-					var files = event.target.files;
-					var file = files[0];
-					console.log(file);
-
-					ngModel.$setViewValue(file);
-					$scope.$apply();
-				});
-			}
-		};
-	});
+	}]);
