@@ -5,21 +5,17 @@ var http = require('http');
 var util = require('util');
 var fs = require('fs.extra');
 
-/* GET users listing. */
+/* POST multi-part form data. */
 router.post('/', function(req, res, next) {
   var form = new multiparty.Form();
   var user = {};
-  //var tempFilePath = '';
-  //var fileName = '';
 
   form.on('error', function(err) {
   	console.log('Error parsing form: ' + err.stack);
   });
 
   form.on('file', function(fieldName, file){
-  	// write file to file system
-  	console.log(file.path);
-  	console.log(file.originalFilename);
+  	// copy file to uploads folder
   	fs.copy(file.path, './uploads/' + file.originalFilename, function(err){
   		if (err) {
   			console.error(err)
@@ -33,8 +29,6 @@ router.post('/', function(req, res, next) {
   form.parse(req, function(err, fields, files) {
   	user = JSON.parse(fields.user[0]); // response is an array that contains a string representation of a JSON object
   	console.log(fields);
-  	//tempFilePath = files.file[0].path;
-  	//fileName = files.file[0].originalFileName;
   	console.log(files);
   	res.sendStatus(200);
   });
