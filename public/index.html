@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="/javascripts/angular.js"></script>
+	<script src="/javascripts/client.js"></script>
+</head>
+<body ng-app='uploader'>
+<!-- ng-app is a directive that flags html element -->
+	<div ng-controller="FormController as formCtrl">
+		<form name="form" novalidate class="simple-form">
+		Name: <input type="text" ng-model="user.name" /><br />
+		Town: <input type="text" ng-model="user.town" /><br />
+		<!-- No angular magic for the file upload -->
+		File: <input id="theFile" data-file name="image" type="file" value="Choose File" />
+		<input type="submit" ng-click="sendFormData()" value="Save" />
+		</form>
+		<!-- Just  using below to verify object data -->
+		<pre>user = {{user | json}}</pre>
+	</div>
+</body>
+</html>
